@@ -10,15 +10,15 @@ terraform {
 }
 
 provider "aws" {
-  region     = "us-west-2"
+  region     = "us-east-2"
  
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-830c94e3"
-  instance_type = "t2.micro"
+resource "aws_instance" "mamoun_server" {
+  ami           = "ami-0661cd3308ec33aaa"
+  instance_type = "t2.medium"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = "mamoun"
   }
 }
