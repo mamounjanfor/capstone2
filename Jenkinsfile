@@ -33,6 +33,18 @@ pipeline {
                sh 'ssh ubuntu@3.132.121.58 minikube service flask'
                }
          }
+         stage('Terraform Init'){
+             steps{
+                 sh 'terraform init'
+             }
+         }
+         stage ("terraform Action") {
+             steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --auto-approve') 
+             }
+         }
+
          stage('Testing') {
               steps {
                     echo 'Testing...'
