@@ -42,7 +42,7 @@ resource "aws_security_group" "my_security_group" {
   }
 
  # outbound from jenkis server
-  egress {
+  ingress {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
