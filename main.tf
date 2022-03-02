@@ -24,7 +24,9 @@ resource "aws_instance" "mamoun_server" {
 }
 
 resource "aws_security_group" "my_security_group" {
-  name        = var.security_group
+  name        =  mamoun_security_group
+  default     =  "my-jenkins-security-group"
+
   description = "security group for Ec2 instance"
 
   ingress {
@@ -42,7 +44,7 @@ resource "aws_security_group" "my_security_group" {
   }
 
  # outbound from jenkis server
-  ingress {
+  egress {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
@@ -50,14 +52,6 @@ resource "aws_security_group" "my_security_group" {
   }
 
   tags= {
-    Name = var.security_group
-  }
-}
-
-resource "aws_eip" "myFirstInstance" {
-  vpc      = true
-  instance = aws_instance.myFirstInstance.id
-tags= {
-    Name = "my_elastic_ip"
+    Name = mamoun_security_group
   }
 }
