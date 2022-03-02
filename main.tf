@@ -24,7 +24,7 @@ resource "aws_instance" "mamoun_server" {
 }
 
 resource "aws_security_group" "my_security_group" {
-  name        =  mamoun_security_group
+  #name        =  mamoun_security_group
   default     =  "my-jenkins-security-group"
 
   description = "security group for Ec2 instance"
