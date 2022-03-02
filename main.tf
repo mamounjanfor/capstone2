@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_instance" "mamoun_server" {
   ami           = "ami-0661cd3308ec33aaa"
   instance_type = "t2.medium"
-  key_name = "mamoun"
+  key_name = "amoun"
   tags = {
     Name = "mamoun"
   }
