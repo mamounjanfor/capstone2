@@ -5,7 +5,7 @@ pipeline {
                steps {
                checkout scm
                }
-          }
+         }
          stage('Terraform Init'){
              steps{
                  sh 'terraform init'
@@ -19,12 +19,12 @@ pipeline {
          } 
           stage('Build Image') {
                steps {
-               sh "docker build -t 19841022/hello ."
+               sh "docker build -t 19841022/flask ."
                }
          }
          stage('Push image') {
                steps {
-               sh 'docker push 19841022/hello'
+               sh 'docker push 19841022/flask'
                }
          }
          stage('Copy the files') {
