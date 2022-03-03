@@ -6,14 +6,25 @@ pipeline {
                checkout scm
                }
           }
+         stage('Terraform Init'){
+             steps{
+                 sh 'terraform init'
+             }
+         }
+         stage ("terraform Action") {
+             steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --auto-approve') 
+             }
+         } 
           stage('Build Image') {
                steps {
-               sh "docker build -t 19841022/flask ."
+               sh "docker build -t 19841022/hello ."
                }
          }
          stage('Push image') {
                steps {
-               sh 'docker push 19841022/flask'
+               sh 'docker push 19841022/hello'
                }
          }
          stage('Copy the files') {
@@ -33,17 +44,7 @@ pipeline {
                sh 'ssh ubuntu@3.132.121.58 minikube service flask'
                }
          }
-         stage('Terraform Init'){
-             steps{
-                 sh 'terraform init'
-             }
-         }
-         stage ("terraform Action") {
-             steps {
-                echo "Terraform action is --> ${action}"
-                sh ('terraform ${action} --auto-approve') 
-             }
-         }
+         
 
          stage('Testing') {
               steps {
