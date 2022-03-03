@@ -6,17 +6,7 @@ pipeline {
                checkout scm
                }
          }
-         stage('Terraform Init'){
-             steps{
-                 sh 'terraform init'
-             }
-         }
-         stage ("terraform Action") {
-             steps {
-                echo "Terraform action is --> ${action}"
-                sh ('terraform ${action} --auto-approve') 
-             }
-         } 
+         
           stage('Build Image') {
                steps {
                sh "docker build -t 19841022/hello ."
@@ -38,6 +28,17 @@ pipeline {
                sh 'ansible -m ping all'
                sh 'ansible-playbook ansi.yml'
                }
+         stage('Terraform Init'){
+             steps{
+                 sh 'terraform init'
+             }
+         }
+         stage ("terraform Action") {
+             steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --auto-approve') 
+             }
+         } 
          }
          stage('expose my app') {
                steps {
